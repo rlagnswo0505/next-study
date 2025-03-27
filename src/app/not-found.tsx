@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import React from "react";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
+import { NextPage } from "next";
 
-export default function NotFound() {
+const NotFound: NextPage = () => {
   return (
     <div
       className="
@@ -40,4 +40,6 @@ export default function NotFound() {
       </Card>
     </div>
   );
-}
+};
+
+export default NotFound;

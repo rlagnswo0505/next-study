@@ -5,13 +5,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div
-      className="
-      w-dvw
-      h-dvh
-      flex
-    "
-    >
+    <>
       <div
         className="w-full flex
       justify-center
@@ -49,9 +43,9 @@ export default function Home() {
           rounded-full
         "
         >
-          로그인
+          <Link href={"/i/flow/login"}>로그인</Link>
         </Button>
       </div>
-    </div>
+    </>
   );
 }
