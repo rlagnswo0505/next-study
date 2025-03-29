@@ -5,7 +5,7 @@ type Props = {
   modal: React.ReactNode;
 };
 
-export default function layout({ children, modal }: Props) {
+export default function BeforeLoginLayout({ children, modal }: Props) {
   return (
     <div
       className="w-dvw
