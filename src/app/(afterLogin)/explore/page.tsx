@@ -1,7 +1,7 @@
 import React from "react";
 
 const page = () => {
-  return <div>쪽지</div>;
+  return <div>검색하기</div>;
 };
 
 export default page;

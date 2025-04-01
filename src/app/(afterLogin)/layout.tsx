@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import NavMenu from "./_component/NavMenu";
 
 import LogoutButton from "./_component/LogoutButton";
+import TrendSection from "./_component/TrendSection";
+import FollowSection from "./_component/FollowSection";
 
 type Props = {
   children: React.ReactNode;
@@ -36,8 +38,13 @@ export default function AfterLoginLayout({ children, modal }: Props) {
           <section className="w-[350px]
           flex flex-col gap-2
           ">
-            <div className="fixed w-[inherit]
-            flex items-center justify-start rounded-full mt-2
+            <div className="w-[inherit] mb-12">
+              
+            <form action=""
+            className="fixed w-[inherit] mt-2"
+            >
+            <div className="
+            flex items-center justify-start rounded-full 
               bg-muted-foreground/10
             ">
               <Search
@@ -45,6 +52,10 @@ export default function AfterLoginLayout({ children, modal }: Props) {
               />
               <Input className="rounded-full pl-10"/>
             </div>
+            </form>
+          </div>
+              <TrendSection/>
+              <FollowSection/>
           </section>
         </div>
       </div>
