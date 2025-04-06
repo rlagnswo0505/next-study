@@ -1,6 +1,12 @@
-import React from "react";
-import Home from "../../home/page";
+import React from 'react'
+import Home from '../../home/page'
+import TweetModal from '../../@modal/(.)compose/tweet/page'
 
-export default function page() {
-  return <Home />;
+export default function Page() {
+  return (
+    <>
+      <Home />
+      <TweetModal />
+    </>
+  )
 }

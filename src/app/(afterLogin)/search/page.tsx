@@ -1,6 +1,6 @@
 import React from 'react';
 
-const page = () => {
+const Search = () => {
   return (
     <div>
       검색하기
@@ -8,4 +8,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Search;
