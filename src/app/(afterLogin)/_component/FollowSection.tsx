@@ -105,7 +105,7 @@ const FollowRecommend = (item : FollowRecommendProps) => {
 
 const FollowSection = () => {
   return (
-    <Card className="p-3 bg-muted-foreground/10 shadow-none">
+    <Card className="p-3 bg-muted-foreground/10 shadow-none mt-2">
     <h2 className="
     text-2xl font-bold mb-2
     ">팔로우 추천</h2>

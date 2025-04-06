@@ -1,5 +1,8 @@
+'use client';
+
 import { Card } from '@/components/ui/card';
 import Link from 'next/link';
+import { useSelectedLayoutSegment } from 'next/navigation';
 
 const trends = [
   {
@@ -40,8 +43,15 @@ const trends = [
   },
 ]
 
+type TrendProps = {
+  id: number;
+  title: string;
+  nickname: string;
+  postCount: number;
+};
 
-const Trend = (item) => {
+
+const Trend = (item:TrendProps) => {
   
   return (
     <Link href={'/search?q=트렌드'} className='hover:bg-muted-foreground/20 flex flex-col px-3'>
@@ -57,8 +67,21 @@ const Trend = (item) => {
 }
 
 const TrendSection = () => {
+  const segment = useSelectedLayoutSegment();
+
+  if (segment === 'explore') return null;
+  
+  if (segment === 'search') return (
+    <Card className="py-3 bg-muted-foreground/10 shadow-none">
+    <h2 className="
+    text-2xl font-bold px-3
+    ">나를 위한 트렌드</h2>
+
+  </Card>
+  )
+
   return (
-            <Card className="py-3 bg-muted-foreground/10 shadow-none">
+            <Card className="py-3 bg-muted-foreground/10 shadow-none mt-2">
               <h2 className="
               text-2xl font-bold px-3
               ">나를 위한 트렌드</h2>
