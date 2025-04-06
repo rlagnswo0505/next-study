@@ -56,7 +56,7 @@ const Explore = () => {
             {trends?.map(item => (
               <Link
                 href={'/search?q=트렌드'}
-                className="hover:bg-muted-foreground/20 flex flex-col px-3"
+                className="hover:bg-muted-foreground/20 flex flex-col p-3"
                 key={item.id}>
                 <div className="text-muted-foreground">{item.title}</div>
                 <div className="text-foreground text-lg font-bold">
