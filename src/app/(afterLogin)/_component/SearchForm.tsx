@@ -5,10 +5,7 @@ import { Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-type Props = {
-  q: string
-}
-const SearchForm = ({ q }: Props) => {
+const SearchForm = () => {
   const router = useRouter()
   const onSubmit: React.FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()

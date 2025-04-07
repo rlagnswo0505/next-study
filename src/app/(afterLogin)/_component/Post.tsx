@@ -7,27 +7,32 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import Link from 'next/link'
 import ActionButtons from './ActionButtons'
 import PostArticle from './PostArticle'
+import { faker } from '@faker-js/faker'
 
 dayjs.locale('ko')
 dayjs.extend(relativeTime)
 
-const post = {
-  postId: 1,
-  User: {
-    userId: 'rlagnswo0505',
-    nickname: '훈제',
-    profileImage: 'https://avatars.githubusercontent.com/u/102115202?v=4'
-  },
-  content: `안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!
-안녕
-
-하이
-  `,
-  createdAt: new Date(),
-  Images: []
-}
-
 const Post = () => {
+  const post = {
+    postId: 1,
+    User: {
+      userId: 'rlagnswo0505',
+      nickname: '훈제',
+      profileImage: 'https://avatars.githubusercontent.com/u/102115202?v=4'
+    },
+    content: `안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!
+  안녕
+  
+  하이
+    `,
+    createdAt: new Date(),
+    Images: [] as any[]
+  }
+
+  if (Math.random() > 0.5) {
+    post.Images.push({ imageId: 1, link: faker.image.urlLoremFlickr() })
+  }
+
   return (
     <PostArticle post={post}>
       <Link
@@ -62,6 +67,18 @@ const Post = () => {
           // wrapping text pre
           className="text-sm break-words whitespace-pre-wrap">
           {post.content}
+        </div>
+        <div>
+          {post.Images && post.Images.length > 0 && (
+            <Link
+              href={`${post.User.userId}/status/${post.postId}/post/${post.postId}/photo/${post.Images[0].imageId}`}
+              className="flex h-60 w-full overflow-hidden rounded-lg">
+              <img
+                src={post.Images[0].link}
+                className="h-full w-full object-cover"
+              />
+            </Link>
+          )}
         </div>
         <ActionButtons />
       </div>

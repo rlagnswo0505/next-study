@@ -18,7 +18,7 @@ const Search = ({ searchParams }: Props) => {
             <BackButton />
           </div>
           <div className="flex w-[526px] items-center">
-            <SearchForm q={searchParams.q} />
+            <SearchForm />
           </div>
         </div>
         <Tabs />
