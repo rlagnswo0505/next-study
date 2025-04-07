@@ -12,7 +12,11 @@ import { faker } from '@faker-js/faker'
 dayjs.locale('ko')
 dayjs.extend(relativeTime)
 
-const Post = () => {
+type Props = {
+  noImage?: boolean
+}
+
+const Post = ({ noImage }: Props) => {
   const post = {
     postId: 1,
     User: {
@@ -29,7 +33,7 @@ const Post = () => {
     Images: [] as any[]
   }
 
-  if (Math.random() > 0.5) {
+  if (Math.random() > 0.5 && !noImage) {
     post.Images.push({ imageId: 1, link: faker.image.urlLoremFlickr() })
   }
 
@@ -71,7 +75,7 @@ const Post = () => {
         <div>
           {post.Images && post.Images.length > 0 && (
             <Link
-              href={`${post.User.userId}/status/${post.postId}/post/${post.postId}/photo/${post.Images[0].imageId}`}
+              href={`/${post.User.userId}/status/${post.postId}/photo/${post.Images[0].imageId}`}
               className="flex h-60 w-full overflow-hidden rounded-lg">
               <img
                 src={post.Images[0].link}
