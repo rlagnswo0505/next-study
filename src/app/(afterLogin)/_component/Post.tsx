@@ -8,6 +8,7 @@ import Link from 'next/link'
 import ActionButtons from './ActionButtons'
 import PostArticle from './PostArticle'
 import { faker } from '@faker-js/faker'
+import PostImages from './PostImages'
 
 dayjs.locale('ko')
 dayjs.extend(relativeTime)
@@ -33,8 +34,16 @@ const Post = ({ noImage }: Props) => {
     Images: [] as any[]
   }
 
+  // if (Math.random() > 0.5 && !noImage) {
+  //   post.Images.push({ imageId: 1, link: faker.image.urlLoremFlickr() })
+  // }
+
+  //0개에서 4개까지 랜덤으로 넣기
   if (Math.random() > 0.5 && !noImage) {
     post.Images.push({ imageId: 1, link: faker.image.urlLoremFlickr() })
+    post.Images.push({ imageId: 2, link: faker.image.urlLoremFlickr() })
+    post.Images.push({ imageId: 3, link: faker.image.urlLoremFlickr() })
+    post.Images.push({ imageId: 3, link: faker.image.urlLoremFlickr() })
   }
 
   return (
@@ -73,16 +82,7 @@ const Post = ({ noImage }: Props) => {
           {post.content}
         </div>
         <div>
-          {post.Images && post.Images.length > 0 && (
-            <Link
-              href={`/${post.User.userId}/status/${post.postId}/photo/${post.Images[0].imageId}`}
-              className="flex h-60 w-full overflow-hidden rounded-lg">
-              <img
-                src={post.Images[0].link}
-                className="h-full w-full object-cover"
-              />
-            </Link>
-          )}
+          <PostImages post={post} />
         </div>
         <ActionButtons />
       </div>
