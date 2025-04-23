@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/dialog'
 
 import { Input } from '@/components/ui/input'
-import React, { useActionState, useEffect, useRef } from 'react'
+import React, { useActionState, useRef } from 'react'
 import ModalBody from './ModalBody'
 import { Loader2 } from 'lucide-react'
 import { useFormStatus } from 'react-dom'
