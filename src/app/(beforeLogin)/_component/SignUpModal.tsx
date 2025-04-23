@@ -1,118 +1,135 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
   DialogHeader,
-  Dialog,
   DialogContent,
   DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+  DialogFooter
+} from '@/components/ui/dialog'
 
-const formSchema = z.object({
-  userId: z.string().min(4).max(20),
-  nickName: z.string().min(2).max(20),
-  password: z.string().min(6).max(20),
-});
+import { Input } from '@/components/ui/input'
+import React, { useActionState, useEffect, useRef } from 'react'
+import ModalBody from './ModalBody'
+import { Loader2 } from 'lucide-react'
+import { useFormStatus } from 'react-dom'
+import { submitForm } from '../_lib/signup'
+import { Label } from '@/components/ui/label'
 
 const SignUpModal = () => {
-  const router = useRouter();
+  const [state, formAction] = useActionState(submitForm, {
+    message: null,
+    data: {
+      userId: '',
+      nickName: '',
+      password: '',
+      image: null
+    }
+  })
+  const { pending } = useFormStatus()
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      userId: "",
-      nickName: "",
-      password: "",
-    },
-  });
+  const imageRef = useRef(null)
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
-    console.log("data", data);
-  };
+  console.log('state', state)
 
   return (
-    <Dialog
-      defaultOpen={true}
-      onOpenChange={(open) => {
-        if (!open) {
-          router.back();
-        }
-      }}
-    >
+    <ModalBody>
       <DialogContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <DialogHeader>
-              <DialogTitle>계정을 생성하세요.</DialogTitle>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <FormField
-                control={form.control}
+        <form action={formAction}>
+          <DialogHeader>
+            <DialogTitle>계정을 생성하세요.</DialogTitle>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div>
+              <Label
+                htmlFor="userId"
+                className="text-base">
+                아이디
+              </Label>
+              <Input
+                placeholder="아이디"
                 name="userId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base">아이디</FormLabel>
-                    <FormControl className="md:text-base">
-                      <Input placeholder="아이디" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                defaultValue={state?.data?.userId}
               />
-              <FormField
-                control={form.control}
-                name="nickName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base">닉네임</FormLabel>
-                    <FormControl className="md:text-base">
-                      <Input placeholder="닉네임" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-base">비밀번호</FormLabel>
-                    <FormControl className="md:text-base">
-                      <Input
-                        placeholder="비밀번호"
-                        {...field}
-                        type="password"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              {state?.fieldErrors?.userId && (
+                <p className="text-destructive text-sm">
+                  {state?.fieldErrors?.userId[0]}
+                </p>
+              )}
             </div>
-            <DialogFooter>
-              <Button type="submit">가입하기</Button>
-            </DialogFooter>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
-  );
-};
 
-export default SignUpModal;
+            <div>
+              <Label
+                htmlFor="nickName"
+                className="text-base">
+                닉네임
+              </Label>
+              <Input
+                placeholder="닉네임"
+                name="nickName"
+                defaultValue={state?.data?.nickName}
+              />
+              {state?.fieldErrors?.nickName && (
+                <p className="text-destructive text-sm">
+                  {state?.fieldErrors?.nickName[0]}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label
+                htmlFor="password"
+                className="text-base">
+                비밀번호
+              </Label>
+              <Input
+                placeholder="비밀번호"
+                name="password"
+                type="password"
+                defaultValue={state?.data?.password}
+              />
+              {state?.fieldErrors?.password && (
+                <p className="text-destructive text-sm">
+                  {state?.fieldErrors?.password[0]}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <Label
+                htmlFor="image"
+                className="text-base">
+                프로필
+              </Label>
+              <Input
+                placeholder="프로필 사진"
+                type="file"
+                accept="image/*"
+                multiple={false}
+                name="image"
+                ref={imageRef}
+              />
+              {state?.fieldErrors?.image && (
+                <p className="text-destructive text-sm">
+                  {state?.fieldErrors?.image[0]}
+                </p>
+              )}
+            </div>
+          </div>
+          <DialogFooter>
+            <div className="flex w-full flex-col items-end justify-center gap-2">
+              <Button
+                type="submit"
+                disabled={pending}>
+                {pending && <Loader2 className="animate-spin" />}
+                가입하기
+              </Button>
+            </div>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </ModalBody>
+  )
+}
+
+export default SignUpModal
