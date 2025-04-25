@@ -1,29 +1,39 @@
-import React from "react";
-import TabProvider from "./_component/TabProvider";
-import Tab from "./_component/Tab";
-import PostForm from "../_component/PostForm";
-import { Separator } from '@/components/ui/separator';
-import Post from "../_component/Post";
+import React from 'react'
+import TabProvider from './_component/TabProvider'
+import Tab from './_component/Tab'
+import PostForm from '../_component/PostForm'
+import { Separator } from '@/components/ui/separator'
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient
+} from '@tanstack/react-query'
+import { getPostRecommends } from './_lib/getPostRecommends'
+import PostRecommends from './_component/PostRecommends'
 
-const Home = () => {
-  return <div className="flex flex-col w-[600px] items-stretch">
-    <TabProvider>
-      <Tab />
-      <div
-        className="mt-[104px]"
-      />
-      <PostForm />
-      <Separator />
-      <div className="flex flex-col">
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-      </div>
-    </TabProvider>
-  </div>;
-};
+const Home = async () => {
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery({
+    queryKey: ['posts', 'recommends'],
+    queryFn: getPostRecommends
+  })
+  const dehydratedState = dehydrate(queryClient)
 
-export default Home;
+  return (
+    <div className="flex w-[600px] flex-col items-stretch">
+      <HydrationBoundary state={dehydratedState}>
+        <TabProvider>
+          <Tab />
+          <div className="mt-[104px]" />
+          <PostForm />
+          <Separator />
+          <div className="flex flex-col">
+            <PostRecommends />
+          </div>
+        </TabProvider>
+      </HydrationBoundary>
+    </div>
+  )
+}
+
+export default Home

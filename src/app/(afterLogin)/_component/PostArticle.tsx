@@ -1,21 +1,12 @@
 'use client'
+import { Post } from '@/model/Post'
 import { useRouter } from 'next/navigation'
 
 import React from 'react'
 
 type Props = {
   children: React.ReactNode
-  post: {
-    postId: number
-    User: {
-      userId: string
-      nickname: string
-      profileImage: string
-    }
-    content: string
-    createdAt: Date
-    Images: any[]
-  }
+  post: Post
 }
 
 const PostArticle = ({ children, post }: Props) => {

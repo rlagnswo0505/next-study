@@ -9,31 +9,17 @@ import ActionButtons from './ActionButtons'
 import PostArticle from './PostArticle'
 import { faker } from '@faker-js/faker'
 import PostImages from './PostImages'
+import { Post as IPost } from '@/model/Post'
 
 dayjs.locale('ko')
 dayjs.extend(relativeTime)
 
 type Props = {
+  post: IPost
   noImage?: boolean
 }
 
-const Post = ({ noImage }: Props) => {
-  const post = {
-    postId: 1,
-    User: {
-      userId: 'rlagnswo0505',
-      nickname: '훈제',
-      profileImage: 'https://avatars.githubusercontent.com/u/102115202?v=4'
-    },
-    content: `안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!안녕하세요!
-  안녕
-  
-  하이
-    `,
-    createdAt: new Date(),
-    Images: [] as any[]
-  }
-
+const Post = ({ post, noImage }: Props) => {
   // if (Math.random() > 0.5 && !noImage) {
   //   post.Images.push({ imageId: 1, link: faker.image.urlLoremFlickr() })
   // }
