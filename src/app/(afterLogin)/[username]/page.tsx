@@ -1,8 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
 import { UserRound } from 'lucide-react'
 import Post from '../_component/Post'
 import BackButton from '../_component/BackButton'
+import FollowButton from '../_component/FollowButton'
 
 export default async function ProfilePage({
   params
@@ -39,11 +39,7 @@ export default async function ProfilePage({
             <p className="text-lg font-bold">{me.nickname}</p>
             <p>@{me.userId}</p>
           </div>
-          <Button
-            className="rounded-full"
-            variant={'outline'}>
-            팔로우
-          </Button>
+          <FollowButton />
         </div>
         <div className="mt-4 flex items-center gap-2">
           <p>0 팔로워</p>

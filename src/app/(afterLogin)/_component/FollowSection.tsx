@@ -6,6 +6,8 @@ import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 type FollowRecommendProps = {
   id: number
@@ -40,10 +42,17 @@ const trends: FollowRecommendProps[] = [
 ]
 
 const FollowRecommend = (item: FollowRecommendProps) => {
+  const { data } = useSession()
+  const router = useRouter()
+
   const handleFollow = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     e.stopPropagation()
     console.log('follow click')
+    if (!data?.user) {
+      return router.replace('/login')
+    }
+    return null
   }
 
   return (
