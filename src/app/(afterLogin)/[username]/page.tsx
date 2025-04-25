@@ -15,7 +15,7 @@ export default async function ProfilePage({
   const me = {
     userId: 'rlagnswo0505',
     nickname: '훈제',
-    image: './5Udwvqim.jpg'
+    image: '/5Udwvqim.jpg'
   }
 
   return (

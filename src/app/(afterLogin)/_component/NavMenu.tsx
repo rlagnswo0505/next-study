@@ -4,30 +4,12 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
 import { House, Mail, PencilLine, Search, UserRound } from 'lucide-react'
-import Image from 'next/image'
-import zLogo from '@/../public/zlogo.png'
 
 const NavMenu = () => {
   const segment = useSelectedLayoutSegment()
 
   return (
     <>
-      <li>
-        <Button
-          variant={'ghost'}
-          size={'icon'}
-          className="h-14 w-14 rounded-full"
-          asChild>
-          <Link href="/home">
-            <Image
-              src={zLogo}
-              alt="zLogo"
-              width={40}
-              height={40}
-            />
-          </Link>
-        </Button>
-      </li>
       <li>
         <Button
           variant={'ghost'}

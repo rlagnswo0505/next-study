@@ -1,6 +1,16 @@
-export { auth as middleware } from './auth'
+import { auth } from './auth'
+import { NextResponse } from 'next/server'
 
-// 로그인을 해야만 접근할 수 있는 페이지를 설정합니다.
+export async function middleware() {
+  const session = await auth()
+  console.log('middleware', session)
+
+  if (!session) {
+    return NextResponse.redirect('http://localhost:3000/i/flow/login')
+  }
+}
+
+// See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/compost/tweet', '/home', '/explore', '/messages', '/search']
+  matcher: ['/compose/tweet', '/home', '/explore', '/messages', '/search']
 }

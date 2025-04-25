@@ -2,6 +2,7 @@
 import { z } from 'zod'
 
 import { redirect } from 'next/navigation'
+import { signIn } from '@/auth'
 // import { signIn } from '@/auth'
 
 const formSchema = z.object({
@@ -108,11 +109,11 @@ export const submitForm = async (
     }
     console.log(await response.json())
     shouldRedirect = true
-    // await signIn('credentials', {
-    //   username: formData.get('id'),
-    //   password: formData.get('password'),
-    //   redirect: false
-    // })
+    await signIn('credentials', {
+      username: inputData.userId,
+      password: inputData.password,
+      redirect: false
+    })
   } catch (err) {
     console.error(err)
     return {

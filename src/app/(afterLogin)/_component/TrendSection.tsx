@@ -1,6 +1,7 @@
 'use client'
 
 import { Card } from '@/components/ui/card'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useSelectedLayoutSegment } from 'next/navigation'
 
@@ -48,6 +49,7 @@ const Trend = (item: TrendProps) => {
 
 const TrendSection = () => {
   const segment = useSelectedLayoutSegment()
+  const { data } = useSession()
 
   if (segment === 'explore') return null
 
@@ -58,17 +60,25 @@ const TrendSection = () => {
       </Card>
     )
 
+  if (data?.user) {
+    return (
+      <Card className="bg-muted-foreground/10 mt-2 py-3 shadow-none">
+        <h2 className="px-3 text-2xl font-bold">나를 위한 트렌드</h2>
+        <div className="flex flex-col gap-2">
+          {trends.map(item => (
+            <Trend
+              key={item.id}
+              {...item}
+            />
+          ))}
+        </div>
+      </Card>
+    )
+  }
+
   return (
     <Card className="bg-muted-foreground/10 mt-2 py-3 shadow-none">
-      <h2 className="px-3 text-2xl font-bold">나를 위한 트렌드</h2>
-      <div className="flex flex-col gap-2">
-        {trends.map(item => (
-          <Trend
-            key={item.id}
-            {...item}
-          />
-        ))}
-      </div>
+      <h2 className="px-3">트렌드를 가져올 수 없습니다.</h2>
     </Card>
   )
 }
