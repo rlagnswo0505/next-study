@@ -1,26 +1,24 @@
-import React from 'react'
-import NavMenu from './_component/NavMenu'
+import React from 'react';
+import NavMenu from './_component/NavMenu';
 
-import LogoutButton from './_component/LogoutButton'
-import TrendSection from './_component/TrendSection'
-import FollowSection from './_component/FollowSection'
-import RightSearchZone from './_component/RightSearchZone'
-import { auth } from '@/auth'
-import Image from 'next/image'
-import zLogo from '@/../public/zlogo.png'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import RQProvider from './_component/RQProvider'
+import LogoutButton from './_component/LogoutButton';
+import TrendSection from './_component/TrendSection';
+import FollowSection from './_component/FollowSection';
+import RightSearchZone from './_component/RightSearchZone';
+import { auth } from '@/auth';
+import Image from 'next/image';
+import zLogo from '@/../public/zlogo.png';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import RQProvider from './_component/RQProvider';
 
 type Props = {
-  children: React.ReactNode
-  modal: React.ReactNode
-}
+  children: React.ReactNode;
+  modal: React.ReactNode;
+};
 
 export default async function AfterLoginLayout({ children, modal }: Props) {
-  const session = await auth()
-
-  console.log('session', session)
+  const session = await auth();
 
   return (
     <RQProvider>
@@ -30,18 +28,9 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
             <div className="fixed flex h-dvh w-[inherit] flex-col justify-between px-2">
               <ul className="flex flex-1 flex-col gap-2">
                 <li>
-                  <Button
-                    variant={'ghost'}
-                    size={'icon'}
-                    className="h-14 w-14 rounded-full"
-                    asChild>
+                  <Button variant={'ghost'} size={'icon'} className="h-14 w-14 rounded-full" asChild>
                     <Link href={session?.user ? '/home' : '/'}>
-                      <Image
-                        src={zLogo}
-                        alt="zLogo"
-                        width={40}
-                        height={40}
-                      />
+                      <Image src={zLogo} alt="zLogo" width={40} height={40} />
                     </Link>
                   </Button>
                 </li>
@@ -66,5 +55,5 @@ export default async function AfterLoginLayout({ children, modal }: Props) {
         {modal}
       </div>
     </RQProvider>
-  )
+  );
 }

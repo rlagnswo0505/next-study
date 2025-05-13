@@ -50,7 +50,6 @@ const Room = () => {
       <div>
         <div className="text-muted-foreground flex">
           <b className="text-primary">{user.nickname}</b>
-          <span>@{user.userId}</span>
           &nbsp; • &nbsp;
           <span>{dayjs(user.Messages.at(-1)?.createdAt).fromNow(true)}</span>
         </div>
