@@ -2,14 +2,16 @@ import React from 'react'
 import BackButton from '../_component/BackButton'
 import SearchForm from '../_component/SearchForm'
 import Tabs from './_component/Tabs'
-import Post from '../_component/Post'
+import SearchResult from './_component/SearchResult'
 
 type Props = {
   searchParams: { q: string; f?: string; pf?: string }
 }
 // const Search = async ({ searchParams }: Props) => {
 
-const Search = ({ searchParams }: Props) => {
+const Search = async ({ searchParams }: Props) => {
+  const query = await searchParams
+
   return (
     <main className="flex flex-col items-stretch">
       <div className="fixed z-1 h-fit w-[598px]">
@@ -18,17 +20,17 @@ const Search = ({ searchParams }: Props) => {
             <BackButton />
           </div>
           <div className="flex w-[526px] items-center">
-            <SearchForm />
+            <SearchForm
+              q={query.q}
+              pf={query?.pf}
+              f={query?.f}
+            />
           </div>
         </div>
         <Tabs />
       </div>
       <div className="mt-[108px]">
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        <SearchResult searchParams={query} />
       </div>
     </main>
   )

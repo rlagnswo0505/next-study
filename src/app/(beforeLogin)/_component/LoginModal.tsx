@@ -64,22 +64,17 @@ const LoginModal = () => {
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     console.log('data', data)
     try {
-      await signIn('credentials', {
+      const result = await signIn('credentials', {
         username: data.userId,
         password: data.password,
         redirect: false
       })
+
+      console.log('result', result)
+
       router.replace('/home')
     } catch (err) {
       console.error('Login failed', err)
-      form.setError('userId', {
-        type: 'manual',
-        message: '아이디 또는 비밀번호가 잘못되었습니다.'
-      })
-      form.setError('password', {
-        type: 'manual',
-        message: '아이디 또는 비밀번호가 잘못되었습니다.'
-      })
     }
   }
 

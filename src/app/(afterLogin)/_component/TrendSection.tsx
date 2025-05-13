@@ -65,7 +65,7 @@ const TrendSection = () => {
       <Card className="bg-muted-foreground/10 mt-2 py-3 shadow-none">
         <h2 className="px-3 text-2xl font-bold">나를 위한 트렌드</h2>
         <div className="flex flex-col gap-2">
-          {trends.map(item => (
+          {trends?.map(item => (
             <Trend
               key={item.id}
               {...item}

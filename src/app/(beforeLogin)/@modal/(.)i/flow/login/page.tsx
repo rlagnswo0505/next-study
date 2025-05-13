@@ -1,5 +1,5 @@
-import LoginModal from "@/app/(beforeLogin)/_component/LoginModal";
-import React from "react";
+import LoginModal from '@/app/(beforeLogin)/_component/LoginModal'
+import React from 'react'
 
 export default function page() {
   return (
@@ -7,5 +7,5 @@ export default function page() {
       인터셉터 라우팅
       <LoginModal />
     </>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import LoginModal from "@/app/(beforeLogin)/_component/LoginModal";
-import React from "react";
+import LoginModal from '@/app/(beforeLogin)/_component/LoginModal'
+import React from 'react'
 
 const page = () => {
-  return <LoginModal />;
-};
+  return <LoginModal />
+}
 
-export default page;
+export default page

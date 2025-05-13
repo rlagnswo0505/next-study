@@ -9,7 +9,7 @@ import {
   QueryClient
 } from '@tanstack/react-query'
 import { getPostRecommends } from './_lib/getPostRecommends'
-import PostRecommends from './_component/PostRecommends'
+import TabDecider from './_component/TabDecider'
 
 const Home = async () => {
   const queryClient = new QueryClient()
@@ -28,7 +28,7 @@ const Home = async () => {
           <PostForm />
           <Separator />
           <div className="flex flex-col">
-            <PostRecommends />
+            <TabDecider />
           </div>
         </TabProvider>
       </HydrationBoundary>
