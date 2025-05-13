@@ -8,7 +8,8 @@ import { Post as IPost } from '@/model/Post'
 export default function PostRecommends() {
   const { data, isPending } = useQuery<IPost[]>({
     queryKey: ['posts', 'recommends'],
-    queryFn: getPostRecommends
+    queryFn: getPostRecommends,
+    staleTime: 60 + 1000
   })
 
   console.log('PostRecommends', data)
