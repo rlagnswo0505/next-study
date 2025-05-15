@@ -1,7 +1,7 @@
-import { MSW_URL } from './config';
+import { NODE_URL } from './config';
 
 export async function getFollowingPosts() {
-  const res = await fetch(`${MSW_URL}/api/followingPosts`, {
+  const res = await fetch(`${NODE_URL}/api/followingPosts`, {
     next: {
       tags: ['posts', 'followings'],
     },

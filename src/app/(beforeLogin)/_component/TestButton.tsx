@@ -5,7 +5,7 @@ import React from 'react';
 
 const TestButton = async () => {
   const loginTest = async () => {
-    const url = process.env.NEXT_PUBLIC_POSTMAN_API_URL;
+    const url = process.env.NODE_URL;
 
     const response = await fetch(`${url}/api/followingPosts`);
 

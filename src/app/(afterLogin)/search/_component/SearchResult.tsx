@@ -11,14 +11,12 @@ type Props = {
 };
 
 const SearchResult = ({ searchParams }: Props) => {
-  const { data } = useQuery<IPost[], object, IPost[], [_1: string, _2: string, Props['searchParams']]>({
+  const { data, error } = useQuery<IPost[], object, IPost[], [_1: string, _2: string, Props['searchParams']]>({
     queryKey: ['posts', 'search', searchParams],
     queryFn: getSearchResult,
     staleTime: 60 * 1000, // fresh -> stale, 5분이라는 기준
     gcTime: 300 * 1000,
   });
-
-  console.log('SearchResult', data);
 
   if (!data) return <div>결과 없음...</div>;
 

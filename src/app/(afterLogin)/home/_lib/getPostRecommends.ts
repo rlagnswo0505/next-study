@@ -1,7 +1,9 @@
-import { MSW_URL } from './config';
+import { NODE_URL } from './config';
 
 export async function getPostRecommends() {
-  const res = await fetch(`${MSW_URL}/api/getPostRecommends`, {
+  console.log('추천 게시물', NODE_URL);
+
+  const res = await fetch(`${NODE_URL}/api/postRecommends`, {
     next: {
       tags: ['posts', 'recommends'],
     },

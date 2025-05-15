@@ -1,35 +1,23 @@
 import { Post } from '@/model/Post';
 import { QueryFunction } from '@tanstack/react-query';
-import { MSW_URL } from '../../home/_lib/config';
+import { NODE_URL } from '../../home/_lib/config';
 
-export const getSearchResult: QueryFunction<
-  Post[],
-  [
-    _1: string,
-    _2: string,
-    searchParams: {
-      q: string;
-      f?: string;
-      pf?: string;
-    }
-  ]
-> = async ({ querykey }) => {
-  const [_1, _2, searchParams] = querykey;
-
-  const res = await fetch(`${MSW_URL}/api/search/${searchParams.q}?${searchParams.toString()}`, {
+export const getSearchResult: QueryFunction<Post[], [_1: string, _2: string, searchParams: { q: string; pf?: string; f?: string }]> = async ({ queryKey }) => {
+  const [_1, _2, searchParams] = queryKey;
+  const urlSearchParams = new URLSearchParams(searchParams);
+  const res = await fetch(`${NODE_URL}/api/search?${urlSearchParams.toString()}`, {
     next: {
       tags: ['posts', 'search', searchParams.q],
-      revalidate: 60, //캐시를 가지고 있는 시간 설정
     },
-    // 캐쉬 사용하기 기본값은 no-store
     cache: 'force-cache',
   });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
 
   if (!res.ok) {
-    throw new Error('Network response was not ok');
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
   }
-
-  console.log('!@#!#!@#@!#@!#!@#res', res);
 
   return res.json();
 };
